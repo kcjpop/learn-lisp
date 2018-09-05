@@ -1,0 +1,29 @@
+branches:
+  only:
+    - master
+
+sudo: required
+
+language: lisp
+
+notifications:
+  email: false
+  
+env:
+  matrix:
+    - LISP=sbcl
+    - LISP=ccl
+
+install:
+  - if [ -x ./install.sh ] && head -2 ./install.sh | grep '^# cl-travis' > /dev/null;
+    then
+      ./install.sh;
+    else
+      curl https://raw.githubusercontent.com/luismbo/cl-travis/master/install.sh | sh;
+    fi
+  - git clone https://github.com/lmj/1am.git ~/lisp/1am
+
+script:
+  - cl -e '(ql:quickload :reverse-number)
+           (when (reverse-number:run)
+             (uiop:quit 1))'
