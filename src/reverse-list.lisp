@@ -1,5 +1,5 @@
 ;; L-99: Ninety-Nine Lisp Problems
-;; P3: Reverse a list
+;; P5: Reverse a list
 (defpackage :kcjpop (:use :cl :1am))
 (in-package :kcjpop)
 
